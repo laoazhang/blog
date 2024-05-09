@@ -1,6 +1,8 @@
 package com.laoazhang.service;
 
+import com.github.pagehelper.PageInfo;
 import com.laoazhang.user.domain.User;
+import com.laoazhang.user.query.UserQuery;
 
 import java.util.List;
 
@@ -18,4 +20,5 @@ public interface IUserService {
 
     void insert(User user);
 
+    PageInfo<User> page(UserQuery userQuery);
 }

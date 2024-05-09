@@ -1,8 +1,11 @@
 package com.laoazhang.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.laoazhang.mapper.UserMapper;
 import com.laoazhang.service.IUserService;
 import com.laoazhang.user.domain.User;
+import com.laoazhang.user.query.UserQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +36,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void insert(User user) {
 
+    }
+
+    @Override
+    public PageInfo<User> page(UserQuery userQuery) {
+        PageHelper.startPage(userQuery.getCurrentPage(), userQuery.getPageSize());
+        List<User> page = userMapper.page(userQuery);
+        PageInfo<User> userPageInfo = new PageInfo<>(page);
+        return userPageInfo;
     }
 }
