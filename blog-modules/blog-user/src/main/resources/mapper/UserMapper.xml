@@ -6,22 +6,8 @@
 
     <!--新增-->
     <insert id="insert">
-        insert into tb_user(user_name,
-                            real_name,
-                            email,
-                            avatar,
-                            password,
-                            remark,
-                            phone,
-                            logininfo_id)
-        values (#{userName},
-                #{realName},
-                #{email},
-                #{avatar},
-                #{password},
-                #{remark},
-                #{phone},
-                #{logininfoId})
+        insert into tb_user(user_name, real_name, email, avatar, password, remark, phone, logininfo_id)
+        values (#{userName}, #{realName}, #{email}, #{avatar}, #{password}, #{remark}, #{phone}, #{logininfoId})
     </insert>
 
     <update id="update">
@@ -54,8 +40,10 @@
         </set>
         where id = #{id}
     </update>
-    <delete id="delete">
-        delete from tb_user where id = #{id}
+    <delete id="deleteById">
+        delete
+        from tb_user
+        where id = #{id}
     </delete>
     <delete id="batchDel">
         delete from tb_user where id in
@@ -63,20 +51,23 @@
             #{id}
         </foreach>
     </delete>
-
-
     <select id="list" resultType="com.laoazhang.user.domain.User">
-        select * from tb_user
+        select *
+        from tb_user
     </select>
     <select id="selectById" resultType="com.laoazhang.user.domain.User">
-        select * from tb_user where id = #{id}
+        select *
+        from tb_user
+        where id = #{id}
     </select>
-
     <select id="page" resultType="com.laoazhang.user.domain.User">
         select * from tb_user
         <include refid="pageSql"></include>
     </select>
-
+    <select id="total" resultType="java.lang.Integer" parameterType="com.laoazhang.user.query.UserQuery">
+        select count(id)
+        from tb_user
+    </select>
     <sql id="pageSql">
         <where>
             <if test="keyword != null and !''.equals(keyword.trim())">
