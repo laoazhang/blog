@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.14</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.laoazhang</groupId>
+    <artifactId>blog</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>blog</name>
+    <description>blog</description>
+
+    <modules>
+        <module>blog-admin</module>
+        <module>blog-common</module>
+        <module>blog-modules</module>
+    </modules>
+
+    <properties>
+        <java.version>17</java.version>
+        <!--子模块版本-->
+        <blog.version>1.0.0</blog.version>
+        <!--mybatis和springboot整合版本-->
+        <mybatis.version>2.3.1</mybatis.version>
+        <!--druid依赖版本-->
+        <druid.version>1.2.18</druid.version>
+        <!--pagehelper分页插件-->
+        <pagehelper.version>1.4.7</pagehelper.version>
+        <!--fastjson2依赖-->
+        <fastjson2.version>2.0.40</fastjson2.version>
+        <!--swagger依赖版本-->
+        <swagger.version>3.0.0</swagger.version>
+        <!--knife4j依赖版本-->
+        <knife4j.version>3.0.3</knife4j.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!--mybatis和springboot整合依赖-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <!-- Druid依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--统一管理admin子模块版本-->
+            <dependency>
+                <groupId>com.laoazhang</groupId>
+                <artifactId>blog-admin</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!--统一管理common子模块版本-->
+            <dependency>
+                <groupId>com.laoazhang</groupId>
+                <artifactId>blog-common</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+            <!--pagehelper分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <!--fastjson2依赖-->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+            <!--swagger接口文档依赖-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- knife4接口文档依赖 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
