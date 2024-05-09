@@ -4,11 +4,10 @@ import com.github.pagehelper.PageInfo;
 import com.laoazhang.service.IUserService;
 import com.laoazhang.user.domain.User;
 import com.laoazhang.user.query.UserQuery;
-import com.laoazhang.utils.R;
+import com.laoazhang.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,8 +34,8 @@ public class UserController {
      */
     @GetMapping
     @ApiOperation(value = "查询所有用户信息")
-    public R<List<User>> list() {
-        return R.ok("查询所有成功！", userService.list());
+    public Result<List<User>> list() {
+        return Result.ok("查询所有成功！", userService.list());
     }
 
 
@@ -47,8 +46,8 @@ public class UserController {
      */
     @GetMapping("/{id}")
     @ApiOperation(value = "根据ID获取用户信息")
-    public R<User> selectById(@ApiParam(value = "用户 ID", required = true) @PathVariable("id") Long id) {
-        return R.ok("查询单个成功！", userService.selectById(id));
+    public Result<User> selectById(@ApiParam(value = "用户 ID", required = true) @PathVariable("id") Long id) {
+        return Result.ok("查询单个成功！", userService.selectById(id));
     }
 
     /**
@@ -58,8 +57,8 @@ public class UserController {
      */
     @PostMapping("/page")
     @ApiOperation(value = "分页查询+模糊查询")
-    public R<PageInfo<User>> page(@RequestBody UserQuery userQuery) {
-        return R.ok("分页查询成功！",userService.page(userQuery));
+    public Result<PageInfo<User>> page(@RequestBody UserQuery userQuery) {
+        return Result.ok("分页查询成功！",userService.page(userQuery));
     }
 
 }
