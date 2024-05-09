@@ -2,6 +2,9 @@ package com.laoazhang.user.query;
 
 
 import com.laoazhang.query.BaseQuery;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Author laoazhang
@@ -9,6 +12,11 @@ import com.laoazhang.query.BaseQuery;
  * @Description: user模块查询条件类
  * @Version 1.0
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserQuery extends BaseQuery {
+
+    private String keyword;
 
 }

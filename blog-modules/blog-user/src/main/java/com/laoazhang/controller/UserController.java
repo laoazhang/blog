@@ -1,17 +1,16 @@
 package com.laoazhang.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.laoazhang.service.IUserService;
 import com.laoazhang.user.domain.User;
+import com.laoazhang.user.query.UserQuery;
 import com.laoazhang.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,6 +49,17 @@ public class UserController {
     @ApiOperation(value = "根据ID获取用户信息")
     public R<User> selectById(@ApiParam(value = "用户 ID", required = true) @PathVariable("id") Long id) {
         return R.ok("查询单个成功！", userService.selectById(id));
+    }
+
+    /**
+     * 分页+模糊查询
+     * @param userQuery
+     * @return
+     */
+    @PostMapping("/page")
+    @ApiOperation(value = "分页查询+模糊查询")
+    public R<PageInfo<User>> page(@RequestBody UserQuery userQuery) {
+        return R.ok("分页查询成功！",userService.page(userQuery));
     }
 
 }
