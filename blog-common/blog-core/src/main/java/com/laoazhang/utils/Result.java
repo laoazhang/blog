@@ -1,6 +1,11 @@
 package com.laoazhang.utils;
 
-import com.laoazhang.enums.Constants;
+import com.laoazhang.enums.ResultCodeEnum;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @Author laoazhang
@@ -8,105 +13,179 @@ import com.laoazhang.enums.Constants;
  * @Description: 统一返回结果集
  * @Version 1.0
  */
-public class Result<T> {
-    // 响应状态码
-    private Integer code;
-
-    // 操作结果
-    private Boolean success;
-
-    // 提示语
+@Data
+@ApiModel(value = "统一返回类型对象")
+public class Result<T> implements Serializable {
+    private static final long serialVersionUID = -3960261604608758516L;
+    @ApiModelProperty(value = "状态码")
+    private int code;
+    @ApiModelProperty(value = "状态信息")
     private String msg;
-
-    // 响应数据
+    @ApiModelProperty(value = "返回数据")
     private T data;
 
-    public static <T> Result<T> ok() {
-        return new Result<T>(Constants.SUCCESS.code, true, "操作成功", null);
+    public static <T> Result<T> success() {
+        return new Result<>();
     }
 
-    public static <T> Result<T> ok(T data) {
-        return new Result<T>(Constants.SUCCESS.code, true, "操作成功", data);
+    /**
+     * 成功,默认状态码,返回消息,自定义返回数据
+     *
+     * @param data 自定义返回数据
+     * @param <T>  返回类泛型,不能为String
+     * @return 通用返回Result
+     */
+    public static <T> Result<T> success(T data) {
+        return new Result<>(data);
     }
 
-    public static <T> Result<T> ok(String message) {
-        return new Result<T>(Constants.SUCCESS.code, true, message, null);
+    /**
+     * 成功,默认状态码,自定义返回消息,返回数据
+     *
+     * @param msg  自定义返回消息
+     * @param data 自定义返回数据
+     * @param <T>  返回类泛型
+     * @return 通用返回Result
+     */
+    public static <T> Result<T> success(String msg, T data) {
+        return new Result<>(msg, data);
     }
 
-    public static <T> Result<T> ok(String message, T data) {
-        return new Result<T>(Constants.SUCCESS.code, true, message, data);
+    /**
+     * 成功,默认状态码,自定义返回消息,无返回数据
+     *
+     * @param msg 自定义返回消息
+     * @param <T> 返回类泛型
+     * @return 通用返回Result
+     */
+    public static <T> Result<T> success(String msg) {
+        return new Result<>(msg);
     }
 
-
-    public static <T> Result<T> fail() {
-        return new Result<T>(Constants.INTERNAL_SERVER_ERROR.code, false, "操作失败！", null);
+    /**
+     * 失败,默认状态码,返回消息,无返回数据
+     *
+     * @param <T> 返回类泛型
+     * @return 通用返回Result
+     */
+    public static <T> Result<T> error() {
+        return new Result<>(ResultCodeEnum.ERROR);
     }
 
-    public static <T> Result<T> fail(T data) {
-        return new Result<T>(Constants.INTERNAL_SERVER_ERROR.code, false, "操作失败！", data);
+    /**
+     * 失败,默认状态码,自定义返回消息,无返回数据
+     *
+     * @param <T> 返回类泛型
+     * @return 通用返回Result
+     */
+    public static <T> Result<T> error(String msg) {
+        return new Result<>(ResultCodeEnum.ERROR.getCode(), msg);
     }
 
-    public static <T> Result<T> fail(String message) {
-        return new Result<T>(Constants.INTERNAL_SERVER_ERROR.code, false, message, null);
+    /**
+     * 失败,自定义状态码,返回消息,无返回数据
+     *
+     * @param code 自定义状态码
+     * @param msg  自定义返回消息
+     * @param <T>  返回类泛型
+     * @return 通用返回Result
+     */
+    public static <T> Result<T> error(int code, String msg) {
+        return new Result<>(code, msg);
     }
 
-    public static <T> Result<T> fail(Integer code) {
-        return new Result<T>(code, false, "操作失败！", null);
+    /**
+     * 失败,使用CodeMsg状态码,返回消息,无返回数据
+     *
+     * @param resultCode CodeMsg,参数如下:
+     *                   <p> code 状态码
+     *                   <p> msg  返回消息
+     * @param <T>        返回类泛型
+     * @return 通用返回Result
+     */
+    public static <T> Result<T> error(ResultCodeEnum resultCode) {
+        return new Result<>(resultCode);
     }
 
-    public static <T> Result<T> fail(String message, T data) {
-        return new Result<T>(Constants.INTERNAL_SERVER_ERROR.code, false, message, data);
+    /**
+     * 成功构造器,无返回数据
+     */
+    private Result() {
+        this(ResultCodeEnum.SUCCESS);
     }
 
-    public static <T> Result<T> fail(Integer code, T data) {
-        return new Result<T>(code, false, "操作失败！", data);
+    /**
+     * 成功构造器,自定义返回数据
+     *
+     * @param data 返回数据
+     */
+    private Result(T data) {
+        this(ResultCodeEnum.SUCCESS, data);
     }
 
-    public static <T> Result<T> fail(Integer code, String message) {
-        return new Result<T>(code, false, message, null);
+    /**
+     * 成功构造器,自定义返回消息,无返回数据
+     *
+     * @param msg 返回消息
+     */
+    private Result(String msg) {
+        this(ResultCodeEnum.SUCCESS.getCode(), msg);
     }
 
-    public static <T> Result<T> fail(Integer code, String message, T data) {
-        return new Result<T>(code, false, message, data);
-    }
-
-
-    public Result(Integer code, Boolean success, String msg, T data) {
+    /**
+     * 构造器,自定义状态码,返回消息
+     *
+     * @param code 状态码
+     * @param msg  返回消息
+     */
+    private Result(int code, String msg) {
         this.code = code;
         this.msg = msg;
-        this.success = success;
+    }
+
+    /**
+     * 成功构造器,自定义返回信息,返回数据
+     *
+     * @param msg  返回信息
+     * @param data 返回数据
+     */
+    private Result(String msg, T data) {
+        this(ResultCodeEnum.SUCCESS.getCode(), msg, data);
+    }
+
+    /**
+     * 构造器,自定义状态码,返回消息,返回数据
+     *
+     * @param code 状态码
+     * @param msg  返回消息
+     * @param data 返回数据
+     */
+    private Result(int code, String msg, T data) {
+        this(code, msg);
         this.data = data;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public Boolean getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
+    /**
+     * 构造器,使用CodeMsg状态码与返回信息,自定义返回数据
+     *
+     * @param resultCode CodeMsg,参数如下:
+     *                   <p> code 状态码
+     *                   <p> msg  返回消息
+     * @param data       返回数据
+     */
+    private Result(ResultCodeEnum resultCode, T data) {
+        this(resultCode);
         this.data = data;
+    }
+
+    /**
+     * 构造器,使用CodeMsg状态码与返回信息
+     *
+     * @param resultCode CodeMsg,参数如下:
+     *                   <p> code 状态码
+     *                   <p> msg  返回消息
+     */
+    private Result(ResultCodeEnum resultCode) {
+        this(resultCode.getCode(), resultCode.getMsg());
     }
 }

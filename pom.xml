@@ -28,8 +28,6 @@
         <java.version>17</java.version>
         <!--子模块版本-->
         <blog.version>1.0.0</blog.version>
-        <!--mybatis和springboot整合版本-->
-        <mybatis.version>2.3.1</mybatis.version>
         <!--druid依赖版本-->
         <druid.version>1.2.18</druid.version>
         <!--pagehelper分页插件-->
@@ -38,21 +36,16 @@
         <fastjson2.version>2.0.40</fastjson2.version>
         <!--swagger依赖版本-->
         <swagger.version>3.0.0</swagger.version>
+        <swaggerui.version>3.0.0</swaggerui.version>
         <!--knife4j依赖版本-->
         <knife4j.version>3.0.3</knife4j.version>
         <!--mybatis-plus依赖版本-->
-        <mybatisplus.version>3.1.1</mybatisplus.version>
+        <mybatisplus.version>3.4.3</mybatisplus.version>
     </properties>
 
 
     <dependencyManagement>
         <dependencies>
-            <!--mybatis和springboot整合依赖-->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
-            </dependency>
             <!-- Druid依赖 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -76,6 +69,12 @@
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.github.jsqlparser</groupId>
+                        <artifactId>jsqlparser</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!--fastjson2依赖-->
             <dependency>
@@ -88,6 +87,11 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swaggerui.version}</version>
             </dependency>
             <!-- knife4接口文档依赖 -->
             <dependency>

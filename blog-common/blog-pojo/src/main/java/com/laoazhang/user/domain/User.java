@@ -1,8 +1,12 @@
 package com.laoazhang.user.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 /**
  * @Author laoazhang
@@ -13,24 +17,26 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("用户实体类")
 public class User {
 
-    // 用户id
+    @ApiModelProperty(value = "用户编号")
     private String id;
-    // 用户名
+    @ApiModelProperty(value = "用户名称")
     private String userName;
-    // 真实姓名
+    @ApiModelProperty(value = "用户姓名")
     private String realName;
-    // 邮箱
+    @ApiModelProperty(value = "用户邮箱")
     private String email;
-    // 头像地址
+    @ApiModelProperty(value = "头像地址")
     private String avatar;
-    // 密码
+    @ApiModelProperty(value = "密码")
     private String password;
-    // 备注
+    @ApiModelProperty(value = "备注")
     private String remark;
-    // 手机号码
+    @ApiModelProperty(value = "手机号码")
     private String phone;
-    // 登录信息id
+    @ApiModelProperty(value = "登录信息id")
     private Long logininfoId;
+
 }
