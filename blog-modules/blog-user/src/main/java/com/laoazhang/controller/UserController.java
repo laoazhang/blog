@@ -1,13 +1,10 @@
 package com.laoazhang.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.laoazhang.service.IUserService;
 import com.laoazhang.user.domain.User;
 import com.laoazhang.user.query.UserQuery;
 import com.laoazhang.utils.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +13,7 @@ import java.util.List;
 /**
  * @Author laoazhang
  * @CreateTime 2024/5/8 14:49
- * @Description: 用户模块控制器
+ * @Description: 用户模块
  * @Version 1.0
  */
 @Api(tags = "用户接口")
@@ -27,38 +24,46 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-
-    /**
-     * 查询所有用户信息
-     * @return 用户的所有信息
-     */
-    @GetMapping
-    @ApiOperation(value = "查询所有用户信息")
-    public Result<List<User>> list() {
-        return Result.ok("查询所有成功！", userService.list());
+    @ApiOperation(value = "新增用户信息")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "user", value = "用户对象", required = true, dataType = "Object")})
+    @PostMapping("/insert")
+    public Result insert(@RequestBody User user) {
+        return userService.insert(user);
     }
 
+    @ApiOperation(value = "根据id删除用户信息")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Long")})
+    @DeleteMapping("/{id}")
+    public Result delete(@PathVariable("id") Long id) {
+        return userService.delete(id);
+    }
 
-    /**
-     * 查询单个用户信息
-     * @param id 用户Id
-     * @return
-     */
+    @ApiOperation(value = "批量删除用户信息")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "ids", value = "用户id集合", required = true, dataType = "Object")})
+    @PatchMapping("batchDel")
+    public Result batchDel(@RequestBody List<Long> ids) {
+        return userService.batchDel(ids);
+    }
+
+    @ApiOperation(value = "更改用户信息")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "user", value = "用户对象", required = true, dataType = "Object")})
+    @PutMapping("/update")
+    public Result update(@RequestBody User user) {
+        return userService.update(user);
+    }
+
+    @ApiOperation(value = "根据id获取用户信息")
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "long")})
     @GetMapping("/{id}")
-    @ApiOperation(value = "根据ID获取用户信息")
-    public Result<User> selectById(@ApiParam(value = "用户 ID", required = true) @PathVariable("id") Long id) {
-        return Result.ok("查询单个成功！", userService.selectById(id));
+    public Result selectById(@ApiParam(value = "用户id", required = true) @PathVariable("id") Long id) {
+        return userService.selectById(id);
     }
 
-    /**
-     * 分页+模糊查询
-     * @param userQuery
-     * @return
-     */
-    @PostMapping("/page")
     @ApiOperation(value = "分页查询+模糊查询")
-    public Result<PageInfo<User>> page(@RequestBody UserQuery userQuery) {
-        return Result.ok("分页查询成功！",userService.page(userQuery));
+    @ApiImplicitParams(value = {@ApiImplicitParam(name = "userQuery", value = "查询条件对象", required = true, dataType = "Object")})
+    @PostMapping("/page")
+    public Result page(@RequestBody UserQuery userQuery) {
+        return userService.page(userQuery);
     }
 
 }

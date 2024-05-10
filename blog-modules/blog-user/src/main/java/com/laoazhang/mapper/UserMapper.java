@@ -1,8 +1,8 @@
 package com.laoazhang.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.laoazhang.user.domain.User;
 import com.laoazhang.user.query.UserQuery;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -12,22 +12,8 @@ import java.util.List;
  * @Description:
  * @Version 1.0
  */
-@Mapper
-public interface UserMapper {
-
-    User selectById(Long id);
-
-    List<User> list();
-
-    void insert(User user);
-
-    void update(User user);
-
-    void deleteById(Long id);
-
-    Integer total(UserQuery userQuery);
+public interface UserMapper extends BaseMapper<User> {
 
     List<User> page(UserQuery userQuery);
 
-    void batchDel(List<Long> ids);
 }
