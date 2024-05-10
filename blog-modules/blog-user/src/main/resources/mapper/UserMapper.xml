@@ -51,10 +51,6 @@
             #{id}
         </foreach>
     </delete>
-    <select id="list" resultType="com.laoazhang.user.domain.User">
-        select *
-        from tb_user
-    </select>
     <select id="selectById" resultType="com.laoazhang.user.domain.User">
         select *
         from tb_user

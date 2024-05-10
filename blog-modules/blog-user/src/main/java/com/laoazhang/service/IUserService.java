@@ -1,5 +1,6 @@
 package com.laoazhang.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.laoazhang.user.domain.User;
 import com.laoazhang.user.query.UserQuery;
@@ -12,7 +13,7 @@ import java.util.List;
  * @Description:
  * @Version 1.0
  */
-public interface IUserService {
+public interface IUserService extends IService<User> {
 
     User selectById(Long id);
 

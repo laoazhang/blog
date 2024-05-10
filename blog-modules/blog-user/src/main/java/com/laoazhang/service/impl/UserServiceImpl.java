@@ -1,5 +1,7 @@
 package com.laoazhang.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.laoazhang.mapper.UserMapper;
@@ -18,7 +20,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -30,12 +32,14 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<User> list() {
-        return userMapper.list();
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        List<User> users = userMapper.selectList(wrapper);
+        return users;
     }
 
     @Override
     public void insert(User user) {
-
+        userMapper.insert(user);
     }
 
     @Override
