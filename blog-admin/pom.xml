@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>com.laoazhang</groupId>
+            <artifactId>blog-system</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.laoazhang</groupId>
             <artifactId>blog-common</artifactId>
         </dependency>
         <dependency>
