@@ -1,5 +1,6 @@
 package com.laoazhang.controller;
 
+import com.laoazhang.auth.PermissionScanAnno;
 import com.laoazhang.service.IPermissionService;
 import com.laoazhang.utils.Result;
 import io.swagger.annotations.*;
@@ -23,6 +24,8 @@ public class PermissionController {
         this.permissionService = permissionService;
     }
 
+
+    @PermissionScanAnno(name = "根据id查询", sn = "permission:get")
     @ApiOperation(value = "根据id获取权限信息")
     @ApiImplicitParams(value = {@ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "long")})
     @GetMapping("/{id}")

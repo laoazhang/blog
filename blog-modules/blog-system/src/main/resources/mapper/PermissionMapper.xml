@@ -11,5 +11,9 @@
         <result column="descs" jdbcType="VARCHAR" property="descs"/>
         <result column="sn" jdbcType="VARCHAR" property="sn"/>
     </resultMap>
+    <!--根据sn编码查询权限-->
+    <select id="selectBySn" resultType="com.laoazhang.system.domain.Permission">
+        select * from tb_permission where sn = #{permissionSn}
+    </select>
 
 </mapper>

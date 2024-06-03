@@ -41,6 +41,8 @@
         <knife4j.version>3.0.3</knife4j.version>
         <!--mybatis-plus依赖版本-->
         <mybatisplus.version>3.4.3</mybatisplus.version>
+        <!--hutool工具包依赖-->
+        <hutool.version>5.8.10</hutool.version>
     </properties>
 
 
@@ -104,6 +106,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatisplus.version}</version>
+            </dependency>
+            <!--hutool工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
