@@ -60,10 +60,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public Result page(UserQuery userQuery) {
-//        PageHelper.startPage(userQuery.getCurrentPage(), userQuery.getPageSize());
+//        Page<Object> objects = PageHelper.startPage(userQuery.getCurrentPage(), userQuery.getPageSize());
 //        List<User> users = userMapper.page(userQuery);
 //        PageInfo<User> pageInfo = new PageInfo<>(users);
-//        return new Result(200, "查询成功", pageInfo);
+//        return Result.success("查询成功", pageInfo);
         IPage<User> ipage = new Page<>(userQuery.getCurrentPage(), userQuery.getPageSize());
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         if (null != userQuery.getKeyword() && "" != userQuery.getKeyword()) {

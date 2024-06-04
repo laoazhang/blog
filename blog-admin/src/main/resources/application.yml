@@ -36,7 +36,7 @@ mybatis-plus:
     map-underscore-to-camel-case: true #开启驼峰字段转换，自动映射时将有下划线的字段的数据映射给驼峰字段
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.laoazhang.**.domain #扫描实体类所在的包
-  mapper-locations: classpath:mapper/**/*Mapper.xml #扫描Mapper.xml文件
+  mapper-locations: classpath*:mapper/**/*Mapper.xml #扫描Mapper.xml文件
   global-config:
     db-config:
       id-type: auto #全局默认主键类型，设置后，即可省略实体对象中的@TableId(type = IdType.AUTO)配置。
