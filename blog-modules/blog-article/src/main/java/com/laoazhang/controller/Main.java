@@ -1,4 +1,4 @@
-package com.laoazhang;
+package com.laoazhang.controller;
 
 /**
  * @Author laoazhang

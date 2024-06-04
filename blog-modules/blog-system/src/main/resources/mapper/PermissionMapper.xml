@@ -13,7 +13,7 @@
     </resultMap>
     <!--根据sn编码查询权限-->
     <select id="selectBySn" resultType="com.laoazhang.system.domain.Permission">
-        select * from tb_permission where sn = #{permissionSn}
+        select * from tb_permission where sn = #{sn}
     </select>
 
 </mapper>

@@ -111,7 +111,8 @@ public class PermissionScan {
                     String name = permissionScanAnnoAnno.name();
                     String permissionSn = permissionScanAnnoAnno.sn();
                     // 4.根据sn编码查询权限对象
-                    Permission permissionTmp = permissionMapper.selectOne(new QueryWrapper<Permission>().eq("sn", permissionSn));
+                    Permission permissionTmp = permissionMapper.selectBySn(permissionSn);
+//                    Permission permissionTmp = permissionMapper.selectOne(new QueryWrapper<Permission>().eq("sn", permissionSn));
                     // 5.如果不存在就添加权限
                     if (permissionTmp == null) {
                         Permission permission = new Permission();

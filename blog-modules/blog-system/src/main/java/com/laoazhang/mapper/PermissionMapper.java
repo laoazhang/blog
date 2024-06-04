@@ -2,6 +2,7 @@ package com.laoazhang.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.laoazhang.system.domain.Permission;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author laoazhang
@@ -10,5 +11,5 @@ import com.laoazhang.system.domain.Permission;
 public interface PermissionMapper extends BaseMapper<Permission> {
 
     // 根据sn编码查询权限
-    Permission selectBySn(String permissionSn);
+    Permission selectBySn(@Param("sn") String sn);
 }
